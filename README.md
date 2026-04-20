@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ruta de la Panela</title>
+
+<style>
+:root{
+  --bg:#f4f1ea;
+  --text:#333;
+  --primary:#6d4c41;
+  --card:#fff;
+}
+.dark{
+  --bg:#1e1e1e;
+  --text:#eee;
+  --card:#2c2c2c;
+}
+body{
+  margin:0;
+  font-family: 'Segoe UI', sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  scroll-behavior:smooth;
+}
+
+/* PROGRESS BAR */
+#progress{
+  position:fixed;
+  top:0;
+  left:0;
+  height:5px;
+  background:#4caf50;
+  width:0%;
+  z-index:999;
+}
+
+/* HEADER */
+header{
+  text-align:center;
+  padding:40px 20px;
+  background:var(--primary);
+  color:white;
+}
+
+/* NAV */
+nav{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  background:#8d6e63;
+}
+nav a{
+  padding:10px 15px;
+  color:white;
+  text-decoration:none;
+  font-weight:bold;
+}
+nav a:hover{
+  background:#5d4037;
+}
+
+/* SECTIONS */
+.section{
+  max-width:900px;
+  margin:auto;
+  padding:40px 20px;
+  opacity:0;
+  transform:translateY(30px);
+  transition:0.6s;
+}
+.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.card{
+  background:var(--card);
+  padding:20px;
+  border-radius:10px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* BUTTONS */
+.btn{
+  background:#ff9800;
+  padding:10px 15px;
+  border:none;
+  cursor:pointer;
+  margin-top:10px;
+}
+
+/* QUIZ */
+.quiz input{
+  padding:10px;
+  width:80%;
+}
+
+/* TOGGLE */
+.toggle{
+  position:fixed;
+  top:10px;
+  right:10px;
+  cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="progress"></div>
+<button class="toggle" onclick="toggleMode()">🌙</button>
+
+<header>
+<h1>🌿 De la tierra a la mesa</h1>
+<p>Experiencia interactiva del proceso de producción de la panela</p>
+<button class="btn" onclick="startEscape()">🎮 Jugar Escape Room</button>
+</header>
+
+<nav>
+<a href="#intro">Intro</a>
+<a href="#siembra">Siembra</a>
+<a href="#molienda">Molienda</a>
+<a href="#clarificacion">Clarificación</a>
+<a href="#quiz">Quiz</a>
+</nav>
+
+<!-- SECTIONS -->
+
+<section id="intro" class="section">
+<div class="card">
+<h2>📄 Introducción</h2>
+<p>Explora el proceso completo de la panela en formato interactivo.</p>
+</div>
+</section>
+
+<section id="siembra" class="section">
+<div class="card">
+<h2>🌱 Siembra</h2>
+<p>Selección de semillas, condiciones de suelo y crecimiento.</p>
+</div>
+</section>
+
+<section id="molienda" class="section">
+<div class="card">
+<h2>🔧 Molienda</h2>
+<p>Extracción del guarapo mediante trapiche.</p>
+</div>
+</section>
+
+<section id="clarificacion" class="section">
+<div class="card">
+<h2>⚗️ Clarificación</h2>
+<p>Eliminación de impurezas con mucílagos.</p>
+</div>
+</section>
+
+<!-- QUIZ -->
+<section id="quiz" class="section">
+<div class="card quiz">
+<h2>🧠 Mini Quiz</h2>
+
+<p>¿Qué es el guarapo?</p>
+<input id="q1"><br>
+<button class="btn" onclick="checkQuiz()">Responder</button>
+<p id="quizResult"></p>
+
+</div>
+</section>
+
+<footer class="section show">
+<p style="text-align:right;">Objeto educativo interactivo 🚀diseñado con dulzura por el profesor <b>Edgar Herrera</b>con Tecnología <a href="https://chatgpt.com/">Chatgpt</a></p>
+</footer>
+
+<script>
+
+/* SCROLL PROGRESS */
+window.onscroll = ()=>{
+  let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+  let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  let scrolled = (winScroll / height) * 100;
+  document.getElementById("progress").style.width = scrolled + "%";
+}
+
+/* ANIMACIONES */
+let sections = document.querySelectorAll(".section");
+window.addEventListener("scroll", ()=>{
+  sections.forEach(sec=>{
+    let pos = sec.getBoundingClientRect().top;
+    if(pos < window.innerHeight - 100){
+      sec.classList.add("show");
+    }
+  });
+});
+
+/* DARK MODE */
+function toggleMode(){
+  document.body.classList.toggle("dark");
+}
+
+/* QUIZ */
+function checkQuiz(){
+  let v = document.getElementById("q1").value.toLowerCase();
+  if(v.includes("jugo")){
+    quizResult.innerHTML="✅ Correcto";
+  } else {
+    quizResult.innerHTML="❌ Intenta";
+  }
+}
+
+/* ESCAPE ROOM LINK */
+function startEscape(){
+  alert("Aquí puedes enlazar tu escape room 😎");
+}
+
+</script>
+
+</body>
+</html>
